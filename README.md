@@ -5,3 +5,5 @@ Qihang Guo, Xibei Yang, Fengjun Zhang, Taihua Xu, Perturbation-augmented Graph C
 
 Main.py--The main function of PAGCN(GCNPE)
 Each .py file begins with a note to the file
+
+Data Links: 链接：https://pan.baidu.com/s/10RNlskhmMtIVk9aUlwCsnA?pwd=7cft 提取码：7cft
