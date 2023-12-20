@@ -13,14 +13,11 @@ def createdataaug(data,adj,alph,devicestr):
     Adjacent = adj
 
     for i in range(Adjacent.shape[0]):
-        tmpdata = data[torch.where(Adjacent[i,:]!=0)[0],:]
+        tmpdata = data[Adjacent[i,:]>0,:]
         if tmpdata.shape[0]>2:
-            tmp_std = torch.zeros(1,tmpdata.shape[1]).to(torch.device(devicestr))
-            for l in range(tmpdata.shape[1]):
-                tmp_std[:,l]=torch.std(tmpdata[:,l])
-            data1[i, :]=data[i, :] + alph * tmp_std*torch.ones(1,data.shape[1]).to(torch.device(devicestr))
-            data2[i, :] = data[i,:] - alph * tmp_std*torch.ones(1,data.shape[1]).to(torch.device(devicestr))
-
+            tmp_std = torch.std(tmpdata, dim=0)
+            data1[i, :]=data[i, :] + alph * tmp_std
+            data2[i, :]=data[i, :] - alph * tmp_std
     return data1,data2
 
 def doGCNPE(se,lr,features, datareal1, datareal2,labels, idx_train, idx_val, idx_test, idx_unlabel,validate,hiddenNum,name,adj,devicestr):
